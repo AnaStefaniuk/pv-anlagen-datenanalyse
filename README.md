@@ -1,5 +1,8 @@
 # Analyse der Leistung von zwei Photovoltaikanlagen
 
+**Autorin:** Ana Stefaniuk
+**Stand:** 30.09.2026
+
 ## Projektziel
 
 In diesem Python-Abschlussprojekt werden Produktions- und Wetterdaten von zwei Photovoltaikanlagen analysiert.
@@ -69,29 +72,40 @@ Vor der Analyse wurden folgende Schritte durchgeführt:
 
 Bei beiden Anlagen besteht ein sehr starker positiver Zusammenhang zwischen Sonneneinstrahlung und AC-Leistung.
 
-- Anlage 1: Korrelation rund 1,00
+- Anlage 1: Korrelation rund 0,996
 - Anlage 2: Korrelation rund 0,91
 
 ### Temperatur und AC-Leistung
 
-Die Modultemperatur hängt bei beiden Anlagen stärker mit der AC-Leistung zusammen als die Außentemperatur.
+Bei einer zusätzlichen Prüfung wurden nur vollständige Messzeitpunkte mit ähnlicher Sonneneinstrahlung zwischen 0,5 und 0,8 verglichen.
 
-- Anlage 1: Modultemperatur 0,96; Außentemperatur 0,73
-- Anlage 2: Modultemperatur 0,87; Außentemperatur 0,65
+Bei Anlage 1 lag die durchschnittliche Leistung je Einheit Sonneneinstrahlung bei Modultemperaturen über 55 °C ungefähr 7,6 % niedriger als bei Temperaturen unter 40 °C.
+
+Dies zeigt, dass die positive Korrelation zwischen Modultemperatur und AC-Leistung hauptsächlich durch die Sonneneinstrahlung beeinflusst wird. Auch diese Zusatzprüfung beweist jedoch keine eindeutige Ursache.
 
 ### Wechselrichter
 
-Bei Anlage 1 liegen die auffälligsten Wechselrichter 9,15 % und 7,70 % unter dem Anlagendurchschnitt.
+Bei Anlage 1 liegen die auffälligsten berechneten Gesamterträge 9,15 % und 7,70 % unter dem Anlagendurchschnitt.
 
-Bei Anlage 2 liegen die drei schwächsten Wechselrichter 23,52 %, 21,76 % und 19,01 % unter dem Durchschnitt.
+Bei Anlage 2 reichen die Abweichungen ungefähr von −23,52 % bis +28,6 %. Die große Spannweite kann durch Datenlücken oder unterschiedlich dimensionierte Wechselrichter beziehungsweise Modulgruppen beeinflusst sein.
+
+Ein niedriger Gesamtertrag beweist deshalb keinen technischen Defekt. Die Anzahl der Messzeilen und erfassten Tage muss bei der Interpretation berücksichtigt werden.
 
 ### Leistungseinbrüche
 
-Bei Anlage 1 wurde bei hoher Sonneneinstrahlung kein auffälliger Leistungseinbruch erkannt.
+Bei der ursprünglichen Berechnung wurden bei Anlage 1 keine auffälligen Leistungseinbrüche erkannt. Bei Anlage 2 wurden 30 auffällige Messzeitpunkte festgestellt. Das entspricht 5,78 % der untersuchten Messungen mit hoher Sonneneinstrahlung.
 
-Bei Anlage 2 wurden 30 auffällige Messzeitpunkte festgestellt. Das entspricht 5,78 % der untersuchten Messungen mit hoher Sonneneinstrahlung.
+Eine zusätzliche Datenqualitätsprüfung zeigte, dass bei Anlage 1 an 99,7 % der untersuchten Tageszeitpunkte alle 22 Wechselrichter Messwerte liefern. Bei Anlage 2 sind es nur 70,7 %.
 
-Besonders auffällig war der 20.05.2020. Zwischen 10:00 und 14:00 Uhr blieb die AC-Leistung trotz hoher Sonneneinstrahlung deutlich reduziert.
+Deshalb wurde zusätzlich die durchschnittliche AC-Leistung je meldendem Wechselrichter untersucht. Nach Berücksichtigung der fehlenden Meldungen sank die Zahl der Auffälligkeiten bei Anlage 2 von 30 auf 19. Der Anteil sank von 5,78 % auf 3,66 %. Bei Anlage 1 blieb die Anzahl bei 0.
+
+Die genaue Zahl wurde somit teilweise durch Datenlücken beeinflusst. Die Kernaussage blieb aber bestehen: Auffällige Leistungseinbrüche wurden ausschließlich bei Anlage 2 erkannt.
+
+Besonders auffällig war der 20.05.2020. Zwischen 10:00 und 14:00 Uhr wurden bei Anlage 2 insgesamt 17 aufeinanderfolgende auffällige Messzeitpunkte festgestellt.
+
+Von den 22 Wechselrichtern der Anlage 2 lieferten in diesem Zeitraum nur zwölf Messwerte. Drei der zwölf meldenden Wechselrichter erzeugten im Durchschnitt keine AC-Leistung. Weitere fünf lagen über 0, aber unter 200. Drei Wechselrichter erreichten mehr als 1.000.
+
+Bei Anlage 1 fehlen am 20.05.2020 zwischen 13:30 und 17:15 Uhr insgesamt 16 Messzeitpunkte. Der vollständige Tagesverlauf von Anlage 1 kann deshalb für diesen Tag nicht beurteilt werden.
 
 ### Tagesverlauf
 
@@ -117,6 +131,16 @@ Die auffälligen Wechselrichter und Zeiträume von Anlage 2 sollten technisch ge
 - Korrelationen zeigen Zusammenhänge, aber keine eindeutigen Ursachen.
 - Die Grenzen zur Erkennung eines Leistungseinbruchs wurden für diese Analyse selbst festgelegt.
 
+## So führst du das Projekt aus
+
+1. Repository herunterladen oder klonen.
+2. Den Projektordner in Visual Studio Code öffnen.
+3. Benötigte Bibliotheken installieren:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ## Verwendete Technologien
 
 - Python
@@ -136,6 +160,7 @@ Die auffälligen Wechselrichter und Zeiträume von Anlage 2 sollten technisch ge
 - `pv_zeitpunkte.csv` – zusammengefasste Messwerte pro Anlage und Zeitpunkt
 - `wechselrichter_ergebnisse.csv` – Erträge und Abweichungen der Wechselrichter
 - `auffaellige_leistungseinbrueche.csv` – erkannte auffällige Messzeitpunkte
+
 
 
 ## Datenquelle
